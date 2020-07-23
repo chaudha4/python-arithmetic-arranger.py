@@ -1,9 +1,19 @@
 import unittest
-from arithmetic_arranger import arithmetic_arranger
+from context import arithmetic_arranger
 
+# A testcase is created by subclassing unittest.TestCase. The three individual tests are defined with methods whose names start 
+# with the letters test. This naming convention informs the test runner about which methods represent tests. The crux of each test 
+# is a call to assertEqual() to check for an expected result; assertTrue() or assertFalse() to verify a condition; or assertRaises() 
+# to verify that a specific exception gets raised. These methods are used instead of the assert statement so the test runner can 
+# accumulate all test results and produce a report. The setUp() and tearDown() methods allow you to define instructions that will 
+# be executed before and after each test method.
 
-# the test case
 class UnitTests(unittest.TestCase):
+    def test_simple_arangement(self):
+        actual = arithmetic_arranger(["235 + 52"])
+        expected = "  235\n+  52\n-----"
+        self.assertEqual(actual, expected)    
+        
     def test_arrangement(self):
         actual = arithmetic_arranger(["3 + 855", "3801 - 2", "45 + 43", "123 + 49"])
         expected = "    3      3801      45      123\n+ 855    -    2    + 43    +  49\n-----    ------    ----    -----"
@@ -38,5 +48,7 @@ class UnitTests(unittest.TestCase):
         expected = "   32         1      45      123\n- 698    - 3801    + 43    +  49\n-----    ------    ----    -----\n -666     -3800      88      172"
         self.assertEqual(actual, expected, 'Expected solutions to be correctly displayed in output when calling "arithmetic_arranger()" with arithemetic problems and a second argument of `True`.')
 
+
+# Execute only if running in main scope and not when running under a separate module (via import)
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(verbosity=2)

@@ -18,9 +18,9 @@ def arithmetic_arranger(problems, printSolution=False):
   spacing = ""
 
   for problem in problems:
-    #print("Processing - " + problem)
+
     entry = problem.split()
-    #line1 += " "  # Operator is always missing on line 1
+
     if entry[1] != "-" and entry[1] != "+":
       #print("Error: Operator must be '+' or '-'.")
       return "Error: Operator must be '+' or '-'."
