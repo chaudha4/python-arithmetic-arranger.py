@@ -15,6 +15,10 @@ Project was initialized with [pipenv](https://pipenv.pypa.io/en/latest/)
 pipenv install pytest --dev
 ```
 
+## Activate this project's virtualenv, run the following:
+```
+pipenv shell
+```
 ##  Useful Commands
 
 - Locate the project
