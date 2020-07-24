@@ -16,6 +16,8 @@ import unittest
 # The setUp() and tearDown() methods allow you to define instructions that will 
 # be executed before and after each test method.
 
+from app.arithmetic_arranger import arithmetic_arranger
+
 class UnitTests(unittest.TestCase):
     def test_simple_arangement(self):
         actual = arithmetic_arranger(["235 + 52"])
