@@ -1,12 +1,19 @@
 import unittest
 
-from app.arithmetic_arranger import arithmetic_arranger
+# This import not required since it is already in __init__.py
+# from app.arithmetic_arranger import arithmetic_arranger
 
-# A testcase is created by subclassing unittest.TestCase. The three individual tests are defined with methods whose names start 
-# with the letters test. This naming convention informs the test runner about which methods represent tests. The crux of each test 
-# is a call to assertEqual() to check for an expected result; assertTrue() or assertFalse() to verify a condition; or assertRaises() 
-# to verify that a specific exception gets raised. These methods are used instead of the assert statement so the test runner can 
-# accumulate all test results and produce a report. The setUp() and tearDown() methods allow you to define instructions that will 
+# A testcase is created by subclassing unittest.TestCase. 
+# 
+# The three individual tests are defined with methods whose names start with the letters test. 
+# This naming convention informs the test runner about which methods represent tests. 
+# 
+# The crux of each test  is a call to assertEqual() to check for an expected result; assertTrue() 
+# or assertFalse() to verify a condition; or assertRaises() 
+# to verify that a specific exception gets raised. These methods are used instead of the 
+# assert statement so the test runner can # accumulate all test results and produce a report. 
+# 
+# The setUp() and tearDown() methods allow you to define instructions that will 
 # be executed before and after each test method.
 
 class UnitTests(unittest.TestCase):
@@ -50,7 +57,8 @@ class UnitTests(unittest.TestCase):
         self.assertEqual(actual, expected, 'Expected solutions to be correctly displayed in output when calling "arithmetic_arranger()" with arithemetic problems and a second argument of `True`.')
 
 
-# Executes only if running in main scope and not when running under a separate module (via import)
+# Execute only if running in main scope and not when running under a separate module (via import)
 if __name__ == "__main__":
-    print(f'{"-"*20}\nExecuting module as script not allowed\n{"-"*20}\n')
-    unittest.main(verbosity=2)
+    mesg = "\nExecuting module as script not allowed\nPlease run main.py from root folder\n"
+    print(f'\n\n{"-"*len(mesg)}{mesg}{"-"*40}\n')
+    #unittest.main(verbosity=2)
