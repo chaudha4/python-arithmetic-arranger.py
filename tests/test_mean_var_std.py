@@ -1,5 +1,14 @@
 import unittest
 
+if __name__ == "__main__":
+    # Add root directory to package search path if running in main scope since python will 
+    # only search for pacakges from this directory (/tests) and below
+
+    import os
+    import sys 
+    srcdir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    sys.path.insert(0, srcdir)
+
 from app.mean_var_std import calculate
 
 # the test case
