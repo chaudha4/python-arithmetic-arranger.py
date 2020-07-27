@@ -34,6 +34,7 @@ print(mean_var_std.calculate([2,6,2,8,4,0,1,5,7]))
 main(module='app._test.test_arithmetic_arranger', exit=False, verbosity=2)
 main(module='tests.test_arithmetic_arranger', exit=False, verbosity=2)
 main(module='tests.test_mean_var_std', exit=False, verbosity=2)
+main(module='tests.test_time_calculator', exit=False, verbosity=2)
 
 
 # Execute only if running in main scope and not when running under a separate module (via import)
