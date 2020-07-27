@@ -1,4 +1,8 @@
 
+# Project Setup
+
+The project environment is setup using pipenv. [How to set up your environment.](PIPENV.md)
+
 # Project Description
 
 Example of Several projects and their testcases.
