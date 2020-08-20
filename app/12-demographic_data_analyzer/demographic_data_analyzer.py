@@ -3,19 +3,22 @@ import pathlib
 
 def calculate_demographic_data(print_data=True):
 
-    #print(pathlib.Path().absolute())
+    print(pathlib.Path().absolute())
 
     # Read data from file
     #df = None
 
     #df = pd.read_csv("/home/chaudha4/Projects/pyprojects/python-projects/app/demographic_data_analyzer/adult.data.csv")
-    df = pd.read_csv("./app/demographic_data_analyzer/adult.data.csv")
+    df = pd.read_csv("./app/12-demographic_data_analyzer/adult.data.csv")
     #print(df)
     
 
     # How many of each race are represented in this dataset? This should be a Pandas series with race names as the index labels.
     race_count = df["race"].value_counts()
     race_count = df.race.value_counts()        # another way
+
+    # You could also get it using
+    #race_count = df.groupby(by="race").size().count()
 
     # What is the average age of men?
 

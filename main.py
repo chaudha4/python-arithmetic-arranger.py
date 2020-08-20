@@ -8,33 +8,6 @@ import sys
 
 from unittest import main
 
-info = f'Run Type[{__name__}]{"-" * 10}Package Name[{__package__}]'
-print(info)
-
-import app.arithmetic_arranger as aa
-from app import arithmetic_arranger as bb
-#from app import mean_var_std as cc
-#from tests import test_mean_var_std as dd
-
-import app.mean_var_std as mean_var_std
-
-
-print(aa.arithmetic_arranger(["235 + 52"]))
-print(bb.arithmetic_arranger(["235 + 52"]))
-print(mean_var_std.calculate([2,6,2,8,4,0,1,5,7]))
-
-
-# Add src and test directory to package search path.
-#srcdir = os.path.abspath(os.path.join(os.path.dirname(__file__), "app"))
-#tstdir = os.path.abspath(os.path.join(os.path.dirname(__file__), "tests"))
-#sys.path.insert(0, srcdir)
-#sys.path.insert(0, tstdir)
-
-#main()
-main(module='app._test.test_arithmetic_arranger', exit=False, verbosity=2)
-main(module='tests.test_arithmetic_arranger', exit=False, verbosity=2)
-main(module='tests.test_mean_var_std', exit=False, verbosity=2)
-main(module='tests.test_time_calculator', exit=False, verbosity=2)
 
 
 # Execute only if running in main scope and not when running under a separate module (via import)
@@ -46,4 +19,19 @@ if __name__ == "__main__":
     info = f'Run Type[{__name__}]{"-" * 10}Package Name[{__package__}]'
     print(info)
     
-    #main(module='test_arithmetic_arranger', exit=False, verbosity=2)
+    # Add src and test directory to package search path.
+    appdir = os.path.abspath(os.path.join(os.path.dirname(__file__), "app"))
+    arr = os.listdir(appdir)
+    print(arr)
+
+    for item in arr:
+        dirName = os.path.abspath(os.path.join(os.path.dirname(__file__), "app/" + item))
+        sys.path.insert(0, dirName)
+        print(dirName)
+
+    print(sys.path)
+
+    for item in arr:
+        main(module="app." + item + ".test_module", exit=False, verbosity=2)
+
+    #main(module='app.01-arithmetic-arranger.test_module', exit=False, verbosity=2)
