@@ -8,30 +8,37 @@ import sys
 
 from unittest import main
 
-
-
-# Execute only if running in main scope and not when running under a separate module (via import)
-if __name__ == "__main__":
+def print_useless_stuff():
     # Run unit tests automatically
-    seperator = "-" * 40    # You can multiply string with a int !!
+    seperator = "-" * 60    # You can multiply string with a int !!
     print(seperator)
     # f-Strings - New way to format strings
     info = f'Run Type[{__name__}]{"-" * 10}Package Name[{__package__}]'
     print(info)
+    print(seperator)
+
+    directories=[d for d in os.listdir(os.getcwd()) if os.path.isdir(d)]
+    paths=[ os.listdir(os.path.abspath(os.path.join(os.path.dirname(__file__), d)))  for d in directories ]    
+    print(paths)
+ 
+def run_tests(dir):
     
+    pkgdir = os.path.abspath(os.path.join(os.path.dirname(__file__), dir))
+    subpkgs = [os.path.abspath(os.path.join(os.path.dirname(__file__), dir + "/" + m)) for m in os.listdir(pkgdir)]
+    modules = [m for m in os.listdir(pkgdir)]
+    for aa in subpkgs:
+        sys.path.insert(0, aa)
+    
+    for aa in modules:        
+        main(module = dir + "." + aa + ".test_module", exit=False, verbosity=1)
+
+
+# Execute only if running in main scope and not when running under a separate module (via import)
+if __name__ == "__main__":
+   
     # Add src and test directory to package search path.
-    appdir = os.path.abspath(os.path.join(os.path.dirname(__file__), "app"))
-    arr = os.listdir(appdir)
-    print(arr)
 
-    for item in arr:
-        dirName = os.path.abspath(os.path.join(os.path.dirname(__file__), "app/" + item))
-        sys.path.insert(0, dirName)
-        print(dirName)
+    
+    run_tests("computing")
+    run_tests("data_analysis")
 
-    print(sys.path)
-
-    for item in arr:
-        main(module="app." + item + ".test_module", exit=False, verbosity=2)
-
-    #main(module='app.01-arithmetic-arranger.test_module', exit=False, verbosity=2)

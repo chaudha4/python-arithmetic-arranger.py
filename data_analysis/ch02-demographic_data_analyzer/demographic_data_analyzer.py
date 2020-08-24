@@ -1,16 +1,17 @@
 import pandas as pd
 import pathlib
+import os
 
 def calculate_demographic_data(print_data=True):
 
-    print(pathlib.Path().absolute())
+    #print(pathlib.Path().absolute())
 
-    # Read data from file
-    #df = None
+    try:
+        #print(os.getcwd())
+        df = pd.read_csv("./data_analysis/ch02-demographic_data_analyzer/adult.data.csv")
+    except:
+        return "\n\nCannot Open file\n"
 
-    #df = pd.read_csv("/home/chaudha4/Projects/pyprojects/python-projects/app/demographic_data_analyzer/adult.data.csv")
-    df = pd.read_csv("./app/12-demographic_data_analyzer/adult.data.csv")
-    #print(df)
     
 
     # How many of each race are represented in this dataset? This should be a Pandas series with race names as the index labels.
