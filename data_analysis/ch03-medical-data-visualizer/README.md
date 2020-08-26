@@ -2,6 +2,8 @@
 
 In this project, you will visualize and make calculations from medical examination data using matplotlib, seaborn, and pandas. The dataset values were collected during medical examinations.
 
+[Example](https://repl.it/@freeCodeCamp/fcc-medical-data-visualizer#README.md)
+
 #### Data description
 
 The rows in the dataset represent patiets and the columns represent information like body measurements, results from various blood tests, and lifestyle choices. You will use the dataset to exploring the relationship between cardiac disease, body measurements, blood markers, and lifestyle choices.
@@ -25,7 +27,11 @@ File name: medical_examination.csv
 
 #### Tasks
 
-Create a chart similar to `examples/Figure_1.png`, where we show the counts of good and bad outcomes for cholesterol, gluc, alco variable, active, and smoke for patients with cardio=1 and cardio=0 in different panels.
+Create a chart similar to ![catplot](./catplot.png)
+
+![heatmap](./heatmap.png)
+
+In this chart, we show the counts of good and bad outcomes for cholesterol, gluc, alco variable, active, and smoke for patients with cardio=1 and cardio=0 in different panels.
 
 Use the data to complete the following tasks in `medical_data_visualizer.py`:
 * Add an 'overweight' column to the data. To determine if a person is overweight, first calculate their BMI by dividing their weight in kilograms by the square of their height in meters. If that value is > 25 then the person is overweight. Use the value 0 for NOT overweight and the value 1 for overweight.
