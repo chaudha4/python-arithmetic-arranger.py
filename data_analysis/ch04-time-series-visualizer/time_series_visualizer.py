@@ -3,6 +3,13 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+'''
+Visualize time series data using a line chart, bar chart, and box plots. Using Pandas, matplotlib, and seaborn 
+to visualize a dataset containing the number of page views each day on the freeCodeCamp.org forum from 2016-05-09 
+to 2019-12-03. The data visualizations will help you understand the patterns in visits and identify yearly 
+and monthly growth.
+'''
+
 
 # Import data (Make sure to parse dates. Consider setting index column to 'date'.)
 currDir = ""
@@ -23,7 +30,6 @@ except:
 
 # Clean data
 df = df [(df.value >= df.value.quantile(0.025)) & (df.value <= df.value.quantile(0.975))]
-
 
 
 def draw_line_plot():
