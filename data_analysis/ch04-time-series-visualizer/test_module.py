@@ -120,4 +120,4 @@ class BoxPlotTestCase(unittest.TestCase):
         self.assertEqual(actual, expected, "Expected 12 boxes in box plot 2")
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(verbosity=2)

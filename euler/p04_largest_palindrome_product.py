@@ -12,22 +12,75 @@ def ispalindrome(n):
     return True
 
 def ispalindrome1(n):
+    """
+    Will work for string and numbers
+    >>> ispalindrome1("hello")
+    False
+    >>> ispalindrome1("SOS")
+    True
+    >>> ispalindrome1(123)
+    False
+    >>> ispalindrome1(121)
+    True
+    """        
     st = str(n)
     return st == st[::-1]
 
 def largest(n):
-    lnum = int("9" * n)
+    """
+    Will work for string and numbers
+    >>> largest(2)
+    9009
+    >>> largest(3)
+    906609
+    """         
+    lnum = int("9" * n)                     # largest n digit number
+    snum = int( "9" * (n - 1) ) + 1         # Smallest n digit number
+
+    #print(lnum, snum)
+
     rnum = lnum
     lp = -1
 
-    for ii in range(rnum + 1):
-        for jj in range(lnum + 1):
+    # Brute Force Method. O(N^2). Takes hours on 5 digit number
+    
+    for ii in range(snum, rnum + 1):
+        for jj in range(snum, lnum + 1):
             kk = ii * jj
             if (ispalindrome1(kk) and kk > lp ):
                 lp = kk
-
+       
 
     return lp
+
+
+def largest_v2(n):
+    """
+    Will work for string and numbers
+    >>> largest_v2(2)
+    9009
+    >>> largest_v2(3)
+    906609
+    >>> largest_v2(4)
+    99000099
+    >>> largest_v2(5)
+    99000099    
+    """         
+    lnum = int("9" * n)                  # largest n digit number
+    snum = int( "9" * (n - 1) )          # largest n-1 digit number
+
+    # Brute Force Method. O(N^2). Go from largest to half way. That shoudld help !!
+    
+    ge = (ii * jj for ii in range(lnum, snum, -1) for jj in range(lnum, snum, -1))
+    products = sorted(set(ge))  # duplicates removed and sorted.
+    
+    
+    for ii in range(len(products) - 1, -1, -1):
+        
+        if (ispalindrome1(products[ii])):
+            return products[ii]
+
+    return -1
 
 
 def testme():
@@ -42,8 +95,11 @@ def testme():
 
 
 if __name__ == "__main__":
-    testme()
-    print("Everything passed. No asserts if we reached here")
+    #testme()
+    #print("Everything passed. No asserts if we reached here")
+
+    import doctest  # See https://docs.python.org/3/library/doctest.html
+    doctest.testmod(verbose=False)      
 
 
 

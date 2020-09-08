@@ -14,11 +14,11 @@ for ii in lst:
     rslt.append(square(ii))
 print("Example 1 - Using Loop", rslt)
 
-# Apply the square function to each element in the list - Using Map
+# Apply the square function to each element in the list - Using Map (Python discourages use of map, filter)
 mp = map(square, lst)
 print("Example 1 - Using Map", list(mp))
 
-# Apply the square function to each element in the list - Using list comprehension
+# Apply the square function to each element in the list - Using list comprehension (Pythonic Way - Preferred)
 rslt = [square(x) for x in lst]
 print("Example 1 - Using list comprehension", rslt)
 
