@@ -27,7 +27,9 @@ def four_seasons(T):
 
     winter_ampli = max(T[:count:]) - min(T[:count:])
     spring_ampli = max(T[count:count*2:]) - min(T[count:count*2:])
+    
     summer_ampli = max(T[count*2:count*3:]) - min(T[count*2:count*3:])
+
     autumn_ampli = max(T[count*3::]) - min(T[count*3::])
 
     max_ampli = winter_ampli
@@ -47,8 +49,9 @@ def four_seasons(T):
     return season
 
 if __name__ == "__main__":
-    #four_seasons([-3, -14, -5, 7, 8, 42, 8, 3])
+    assert four_seasons([-3, -14, -5, 7, 8, 42, 8, 3]) == "SUMMER", "Test 1"
+
     #four_seasons([2, -3, 3, 1, 10, 8, 2, 5, 13, -5, 3, -18])
 
     import doctest  # See https://docs.python.org/3/library/doctest.html
-    doctest.testmod(verbose=True)      
+    #doctest.testmod(verbose=True)      

@@ -9,7 +9,9 @@ print(f'Square of 5 is {square(5)}')
 lst = [1, 2, -5, 4]
 
 # Apply the square function to each element in the list - Using For loop
-rslt = []
+
+rslt = list() # Or rslt = []
+
 for ii in lst:
     rslt.append(square(ii))
 print("Example 1 - Using Loop", rslt)

@@ -62,6 +62,23 @@ def ab_string_v2(S):
         return True
     return False
 
+def ab_string_v3(S):
+
+    """
+    >>> ab_string("aaaaaaabbbbbbbbbb")
+    True
+    >>> ab_string("b")
+    True
+    >>> ab_string("aba")
+    False
+    >>> ab_string("aaba")
+    False
+    """
+
+    if len(S.split("ba")) == 1:
+        return False
+    return True
+
 
 if __name__ == "__main__":
     import doctest  # See https://docs.python.org/3/library/doctest.html

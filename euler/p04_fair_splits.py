@@ -40,16 +40,44 @@ def fair_split(A, B):
     fair_count = 0
 
     for ii in range(1,len(A)):
-        #print(ii, sum(A[:ii]), sum(A[ii::]), sum(B[:ii]), sum(B[ii::]))
+        # O(N * 4n) comlexity. This will not scale at all even though the code is clean. The sum is being
+        # recalcualted in every loop iteration.
+
         if ( sum(A[:ii]) == sum(A[ii::]) == sum(B[:ii]) == sum(B[ii::] ) ):
                 fair_count += 1
 
     return fair_count
 
+
+def fair_split_v1(A, B):
+    
+    fair_count = 0
+    sum_a_l = 0
+    sum_b_l = 0
+
+    sum_a_r = sum(A)
+    sum_b_r = sum(B)
+
+    # Complexity is O(N) - much better than previous one. Will scale to very large arrays !!
+    for ii in range(0,len(A)):
+        
+        sum_a_l = sum_a_l + A[ii]
+        sum_b_l = sum_b_l + B[ii]
+
+        sum_a_r = sum_a_r - A[ii]
+        sum_b_r = sum_b_r - B[ii]
+
+        print(sum_a_l, sum_a_r, sum_b_l, sum_b_r)
+        if (sum_a_l == sum_a_r == sum_b_l == sum_b_r):
+            fair_count += 1
+
+    return fair_count
+
+
 if __name__ == "__main__":
-    #print(fair_split([0, 4, -1, 0, 3], [0, -2, 5, 0, 3]))
+    assert fair_split_v1([0, 4, -1, 0, 3], [0, -2, 5, 0, 3]) == 2
     #print(fair_split([2, -2, -3, 3], [0, 0, 4, -4]))
     #print(fair_split([3, 2, 6],[4, 1, 6]))
 
     import doctest  # See https://docs.python.org/3/library/doctest.html
-    doctest.testmod(verbose=True)      
+    #doctest.testmod(verbose=True)      

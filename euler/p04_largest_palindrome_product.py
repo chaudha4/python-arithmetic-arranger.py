@@ -54,6 +54,9 @@ def largest(n):
     return lp
 
 
+# This solution doesn't scale beyond 3 digit number. FOr 5 digit number, it takes several hours.
+# See V3 for a better optimization that scales better.
+
 def largest_v2(n):
     """
     Will work for string and numbers
@@ -63,9 +66,8 @@ def largest_v2(n):
     906609
     >>> largest_v2(4)
     99000099
-    >>> largest_v2(5)
-    99000099    
-    """         
+    """
+
     lnum = int("9" * n)                  # largest n digit number
     snum = int( "9" * (n - 1) )          # largest n-1 digit number
 
@@ -83,6 +85,37 @@ def largest_v2(n):
     return -1
 
 
+
+def largest_v3(n):
+    """
+    Will work for string and numbers
+    >>> largest_v3(2)
+    9009
+    >>> largest_v3(3)
+    906609
+    >>> largest_v3(4)
+    99000099
+    >>> largest_v3(5)
+    9966006699    
+    """
+    if n == 1:
+        return 1
+    
+    lnum = int("9" * n)                  # largest n digit number
+    snum = int( "9" * (n - 1) )          # largest n-1 digit number
+
+  
+    # Optimization 99*99, then 98*99, 98*98, then 97*99, 97*98, 97*97 and so on
+    for ii in range(lnum, snum, -1):
+        for jj in range(lnum, ii-1, -1):    
+            #print(ii, jj)
+            if (ispalindrome1(kk := ii*jj)):    # walrus operator - assign and use
+                return kk
+            else:
+                #print("Not a palindrome", ii, jj, kk)
+                pass
+    return -1
+
 def testme():
     assert type(largest(2)) == int, "largest() should retun an int type"
     assert ispalindrome(1), "ispalindrome(1) should be True"
@@ -99,7 +132,7 @@ if __name__ == "__main__":
     #print("Everything passed. No asserts if we reached here")
 
     import doctest  # See https://docs.python.org/3/library/doctest.html
-    doctest.testmod(verbose=False)      
+    doctest.testmod(verbose=True)      
 
 
 
