@@ -8,6 +8,9 @@ play(player, abbey, 1000)
 play(player, kris, 1000)
 play(player, mrugesh, 1000)
 
+#play(player, kris, 100, True)
+#play(player, mrugesh, 100, True)
+
 # Uncomment line below to play interactively against a bot:
 # play(human, abbey, 20, verbose=True)
 

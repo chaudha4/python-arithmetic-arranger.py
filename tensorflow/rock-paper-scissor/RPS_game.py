@@ -2,6 +2,10 @@
 
 import random
 
+# Abhishek - Note that the player1 and Player2 are functions and so they will maintain 
+# their state (ie arguments) across multiple calls. That is how the opponent_history 
+# is being maintained across different runs of the game. Note that opponent_history
+# is not defined statically or gloablly but is still able to grow in every iteration and is not lost.
 
 def play(player1, player2, num_games, verbose=False):
     p1_prev_play = ""
@@ -39,8 +43,10 @@ def play(player1, player2, num_games, verbose=False):
     else:
         win_rate = results['p1'] / games_won * 100
 
+    print("*" * 100)
     print("Final results:", results)
     print(f"Player 1 win rate: {win_rate}%")
+    print("*" * 100)
 
     return (win_rate)
 
