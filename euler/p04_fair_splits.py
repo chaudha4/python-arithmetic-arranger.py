@@ -41,7 +41,7 @@ def fair_split(A, B):
 
     for ii in range(1,len(A)):
         # O(N * 4n) comlexity. This will not scale at all even though the code is clean. The sum is being
-        # recalcualted in every loop iteration.
+        # recalculated in every loop iteration.
 
         if ( sum(A[:ii]) == sum(A[ii::]) == sum(B[:ii]) == sum(B[ii::] ) ):
                 fair_count += 1
