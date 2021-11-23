@@ -1,6 +1,8 @@
-a = [1,2,3]
 
-print(a[::-1])
+a = 4
 
-for aa in a[::-1]:
-    print(aa)
+result = 1
+for aa in range(1,a+1):
+    result = result * aa
+
+print(result)
