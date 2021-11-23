@@ -5,9 +5,19 @@ Project was initialized with [pipenv](https://pipenv.pypa.io/en/latest/)
 
 ## Steps
 
-1. Created the env using `pipenv --three`
+1. Clone  the git repo.
+1. Create Virtualenv by running `pipenv --three`
 1. Install all dependencies for a project (including dev) using `pipenv install --dev`
 
+## Run a specific program
+1. Activate the project's virtualenv - `pipenv shell`
+1. Run the program - `python beginner/listmax.py`
+
+
+## Update existing packages
+```
+pipenv update
+```
 ## Install new packages
 
 1. Install a dev dependency. This will also update the `PipFile`.
@@ -15,12 +25,6 @@ Project was initialized with [pipenv](https://pipenv.pypa.io/en/latest/)
 pipenv install pytest --dev
 pipenv install tensorflow
 ```
-
-## Activate this project's virtualenv, run the following:
-```
-pipenv shell
-```
-
 
 ##  Useful Commands
 

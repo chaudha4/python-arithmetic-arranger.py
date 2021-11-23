@@ -15,8 +15,14 @@ only ”algorithm”/ “instructions” how to calculate that Python stores. An
 
 import sys
 
-print( sys.getsizeof([x * 5 for x in range(1000)]) )    # Prints 9016
-print( sys.getsizeof(x * 5 for x in range(1000)) )      # Print 112
+a = [x * 5 for x in range(100)]
+b = (x * 5 for x in range(100))
+c = tuple(x * 5 for x in range(100))
 
-print( sys.getsizeof([x * 5 for x in range(10000)]) )    # Prints 87616
-print( sys.getsizeof(x * 5 for x in range(10000)) )      # Print 112
+print( sys.getsizeof(a) )    # Prints 9016
+print( sys.getsizeof(b) )    # Print 112
+print( sys.getsizeof(c) )    # Print 840
+
+print(a)
+print(b)
+print(c)
