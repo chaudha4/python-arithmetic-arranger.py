@@ -3,7 +3,7 @@ def part1():
     h = 0   #Horizontal position
     v = 0   #vertical position
 
-    with open("/localdisk/github/Python-Projects/adventofcode/dive.txt", "r") as f:
+    with open("adventofcode/02-dive.txt", "r") as f:
         data = f.read().split()
 
         for ii in range(0, len(data) - 1, 2):
@@ -37,7 +37,7 @@ def part2():
     aim = 0
     h = 0
     d = 0
-    with open("/localdisk/github/Python-Projects/adventofcode/dive.txt", "r") as f:
+    with open("adventofcode/02-dive.txt", "r") as f:
         data = f.read().split()
 
         for ii in range(0, len(data) - 1, 2):
@@ -54,4 +54,6 @@ def part2():
     print(h,d,aim)
     print(h*d)
 
+
+part1()
 part2()

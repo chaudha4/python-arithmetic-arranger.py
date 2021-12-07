@@ -3,7 +3,7 @@ https://adventofcode.com/2021/day/1
 """
 
 def part1():
-    with open("/localdisk/github/Python-Projects/adventofcode/sonar_sweep.txt", "r") as f:
+    with open("adventofcode/01-sonar_sweep.txt", "r") as f:
         #data = f.read()
         data = f.read().split()
         print(len(data))
@@ -30,7 +30,7 @@ def part1():
 def part2():
 
     data = []
-    with open("/localdisk/github/Python-Projects/adventofcode/sonar_sweep.txt", "r") as f:
+    with open("adventofcode/01-sonar_sweep.txt", "r") as f:
         data = [ int(d) for d in f.read().split() ]
 
     print(data)
@@ -41,4 +41,5 @@ def part2():
 
     print(count)
 
+part1()
 part2()
