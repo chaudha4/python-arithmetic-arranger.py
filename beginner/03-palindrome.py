@@ -7,10 +7,17 @@ def isPalindrome(a):
         #print(aa, idx)
         if ( aa != a[ll-idx]):
             isPalindrome = False
-            break;
+            break
 
     print(a, isPalindrome)
     return isPalindrome
+
+
+# You can just reverse the string and compare it !!
+def trick(a):
+    if a == a[::-1]:
+        return True
+    return False
 
 
 if __name__ == "__main__":
@@ -18,3 +25,4 @@ if __name__ == "__main__":
     isPalindrome("abbbbbbbbbbbbbba")
     isPalindrome("abaaba")
     isPalindrome("abas")
+    print(trick("abaa"))

@@ -1,14 +1,5 @@
 
-"""
-Reverse Word Order
-"""
+x = [1,2,3]
+y = [4,5]
 
-a = "My Name is Abhishek"
-b = a.split()
-c = ""
-
-for bb in reversed(b):
-    print(bb)
-    c = c + bb + " "
-
-print(c)
+print(*x + "Test")
