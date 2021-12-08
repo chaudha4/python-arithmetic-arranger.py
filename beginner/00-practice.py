@@ -1,9 +1,15 @@
 
+x1, y1, x2, y2 = 9,7,9,9
 
-A = [1,1,0,1,0]
-S = ""
-for a in A:
-    S = S + str(a)
+xstep, ystep = 1, 1
 
-print(S)
-print(int(S, 2))
+if (x1 > x2):
+    xstep = -1
+
+if (y1 > y2):
+    ystep = -1
+
+for xx, yy in zip(range(x1, x2, xstep), range(y1, y2, ystep)):
+    print(xx, yy)
+
+
