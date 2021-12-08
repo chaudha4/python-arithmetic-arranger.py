@@ -1,14 +1,15 @@
 
-"""
-Reverse Word Order
-"""
+x1, y1, x2, y2 = 9,7,9,9
 
-a = "My Name is Abhishek"
-b = a.split()
-c = ""
+xstep, ystep = 1, 1
 
-for bb in reversed(b):
-    print(bb)
-    c = c + bb + " "
+if (x1 > x2):
+    xstep = -1
 
-print(c)
+if (y1 > y2):
+    ystep = -1
+
+for xx, yy in zip(range(x1, x2, xstep), range(y1, y2, ystep)):
+    print(xx, yy)
+
+
