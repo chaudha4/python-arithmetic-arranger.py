@@ -7,20 +7,13 @@ def func1():
     with open("./adventofcode/03-binary-diagnostic.txt") as f:
         nums = f.read().split()
 
-        cnt0 = []
-        cnt1 = []
+
+        # All binary num have same size in the input file
+        L = len(nums[0])
+        cnt0 = [0] * L
+        cnt1 = [0] * L
         for bits in nums:
             for idx, bit in enumerate(bits):
-                try:
-                    test = cnt0[idx]
-                except:
-                    cnt0.append(0)
-
-                try:
-                    test = cnt1[idx]
-                except:
-                    cnt1.append(0)
-
                 if ( bit == '0'):
                     cnt0[idx] = cnt0[idx] + 1
                 else:
@@ -31,7 +24,7 @@ def func1():
         gamma_rate = ""
         epsilon_rate = ""
         for msb, lsb in zip(cnt0, cnt1):
-            print(msb, lsb)
+
             if (msb > lsb):
                 gamma_rate = gamma_rate + "1"
                 epsilon_rate = epsilon_rate + "0"
@@ -39,14 +32,15 @@ def func1():
                 gamma_rate = gamma_rate + "0"
                 epsilon_rate = epsilon_rate + "1"
         
-        print(gamma_rate, epsilon_rate)
+        
         gr = int(gamma_rate, 2)
         er = int(epsilon_rate, 2)
         
-        print(gr, er)
+        print("Gamma Rate", gamma_rate, gr, "\nEpsilon Rate", epsilon_rate, er)
 
         power_consumption = gr * er
-        print(power_consumption)
+
+        print("Power Consumption", power_consumption)
         return power_consumption
 
 
@@ -144,5 +138,5 @@ def func2():
         print(ogr, csr, lsr)
 
 
-#func1()
+func1()
 func2()
