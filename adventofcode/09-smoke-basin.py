@@ -76,6 +76,7 @@ def get_basin(file="adventofcode/temp.txt"):
         print(len(set(rslt)))
 
 
+# recursive function !!
 def get_higher_neighbours(data, input):
 
     #print("Entering with ", input)
@@ -135,7 +136,7 @@ def get_higher_neighbours(data, input):
         # Return the input back so the it gets accumulated by the recursive case.
         return input
     
-    # Recursion - Recursive case
+    # Recursion - Recursive case - Accumulate the data
     for data in get_higher_neighbours(data, rslt):
         input.append(data)
     return input
