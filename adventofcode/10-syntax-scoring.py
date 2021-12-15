@@ -1,12 +1,6 @@
 #
 # https://adventofcode.com/2021/day/10
 
-
-
-
-from os import register_at_fork
-
-
 def eliminateMatching(row):
 
     # convert to a list of chars from string
@@ -21,8 +15,6 @@ def eliminateMatching(row):
         ">": "<",
     }
     
-    
-    index = 0
 
     for ii, cc in enumerate(line):
 
