@@ -1,5 +1,6 @@
 # https://adventofcode.com/2021/day/11
 
+# https://github.com/hyper-neutrino/advent-of-code/blob/main/2021/day11p1.py
 
 def parray(data):
     for ii in range(len(data)):
@@ -166,5 +167,54 @@ def puzzle2():
     
     print(f'The first step during which all octopuses flash is {steps}')
 
-puzzle1()
-puzzle2()
+
+
+fcnt = 0
+
+def step(data):
+    for r in range(0, len(data)):
+        for c in range(0, len(data[r])):
+            data[r][c] += 1
+            if data[r][c] == 10:
+                flash(data, r, c)
+    
+    for r in range(0, len(data)):
+        for c in range(0, len(data[r])):
+            if data[r][c] > 9:
+                data[r][c] = 0
+    
+        
+
+def flash(data, r, c):
+    global fcnt
+    fcnt += 1
+    for x in range(r-1, r+2):
+        for y in range(c-1, c+2):
+            # Only process the adjacent cells.
+            if (x == r and y == c):
+                continue
+            # Watch out for out of range cells.
+            if (0 <= x < len(data)) and (0 <= y < len(data[0])):
+                data[x][y] += 1
+                if data[x][y] == 10:
+                    flash(data, x, y)
+                    
+                    
+
+
+
+def puzzle3():
+    #data = load("adventofcode/11-dumbo-octopus.txt")
+    data = load()
+    parray(data)
+    for i in range(100):
+        print(f'In step {i} -----------')
+        step(data)
+        parray(data)
+    
+    print(fcnt)
+
+
+#puzzle1()
+#puzzle2()
+puzzle3()

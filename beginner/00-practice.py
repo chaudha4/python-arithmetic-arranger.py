@@ -9,3 +9,5 @@ for ii in range(8, -1, -1):
     
     print(ii)
 
+
+print(1 <= 3 <= 5)
