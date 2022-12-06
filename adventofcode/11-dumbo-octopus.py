@@ -170,14 +170,26 @@ def puzzle2():
 
 
 fcnt = 0
+allFlashed = False
 
-def step(data):
+def step(data, look4allflashed = False):
     for r in range(0, len(data)):
         for c in range(0, len(data[r])):
             data[r][c] += 1
             if data[r][c] == 10:
                 flash(data, r, c)
     
+    if (look4allflashed):
+        global allFlashed
+        allFlashed = True
+        for r in range(0, len(data)):
+            for c in range(0, len(data[r])):
+                if data[r][c] < 10:
+                    allFlashed = False
+                    break
+    
+
+    #Reset to zero for all the octopuses that flashed.
     for r in range(0, len(data)):
         for c in range(0, len(data[r])):
             if data[r][c] > 9:
@@ -188,11 +200,14 @@ def step(data):
 def flash(data, r, c):
     global fcnt
     fcnt += 1
+    
+    # handle the adjacent cells
     for x in range(r-1, r+2):
         for y in range(c-1, c+2):
             # Only process the adjacent cells.
             if (x == r and y == c):
                 continue
+            
             # Watch out for out of range cells.
             if (0 <= x < len(data)) and (0 <= y < len(data[0])):
                 data[x][y] += 1
@@ -203,9 +218,9 @@ def flash(data, r, c):
 
 
 
-def puzzle3():
-    #data = load("adventofcode/11-dumbo-octopus.txt")
-    data = load()
+def puzzle1a():
+    data = load("adventofcode/11-dumbo-octopus.txt")
+    #data = load()
     parray(data)
     for i in range(100):
         print(f'In step {i} -----------')
@@ -215,6 +230,25 @@ def puzzle3():
     print(fcnt)
 
 
+def puzzle2a():
+    data = load("adventofcode/11-dumbo-octopus.txt")
+    #data = load()
+    #parray(data)
+
+    stp = 1
+    while True:
+        #print(f'In step {i} -----------')
+        step(data, True)
+        if allFlashed:
+            print(stp)
+            break
+
+        stp += 1
+        #parray(data)
+    
+    print(fcnt)
+
+
 #puzzle1()
 #puzzle2()
-puzzle3()
+puzzle2a()
