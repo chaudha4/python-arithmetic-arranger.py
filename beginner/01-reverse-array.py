@@ -8,17 +8,17 @@ while (i >= 0):
     b.append(a[i])
     i -= 1
 
-print(b)
+print(f'{b=}')
 
 # Shortcut
 
 c = a[::-1]
-print(c)
+print(f'{c=}')
 
 #https://docs.python.org/3/tutorial/datastructures.html
 
 for aa in reversed(a):
-    print("Using reversed - ", aa)
+    print(f"Using reversed {aa=}")
 
 b = list(reversed(a))
-print(b)
+print(f'{b=}')

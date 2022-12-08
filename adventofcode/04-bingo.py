@@ -25,7 +25,7 @@ class board:
 
     # Check if I won - All numbers in the col are called.
     def column_check(self):
-        ret = True
+        ret = False
         for ii in range(self.cols):
             ret = True
             for jj in range(self.rows):
@@ -40,7 +40,7 @@ class board:
 
     # Check if I won - All numbers in a row are called.
     def row_check(self):
-        ret = True
+        ret = False
         for ii in range(self.cols):
             ret = True
             for jj in range(self.rows):
@@ -84,8 +84,8 @@ class board:
 
 
 
-# Play the game
-def play(cn, bl, wl):
+# Play the game - figure out which board will win first. 
+def play_to_win(cn, bl, wl):
     for nn in cn:
         print("Number called: ", nn)
         for index, b in enumerate(bl):
@@ -99,9 +99,38 @@ def play(cn, bl, wl):
             if (b.column_check() == True):
                 wl[index] = True
                 result(b, num)
+                # won !! return score.
+                return b.get_sum() * num
             if (b.row_check() == True):
                 wl[index] = True
                 result(b, num)
+                # won !! return score.
+                return b.get_sum() * num
+
+    raise AssertionError(f'Unreachable Code - No one won and we ran out of numbers')
+
+def play_to_lose(calledList, boardList):
+
+    WonList = [False] * len(boardList)
+
+    for numCalled in calledList:
+        print("Number called: ", numCalled)
+        
+        for index, board in enumerate(boardList):
+
+
+
+            #Process only if not already won
+            if not WonList[index]:
+                board.call(int(numCalled))
+                if (board.column_check() == True or board.row_check() == True):                   
+                    #Check if this is the last board that has just won
+                    if WonList.count(False) == 1:
+                        return board.get_sum() * int(numCalled)                    
+                    else:
+                        WonList[index] = True
+        
+    raise AssertionError(f'Unreachable Code - No one won and we ran out of numbers')
 
 
 def result(board, N):
@@ -122,24 +151,31 @@ wl = []
 # Called Numbers
 cn = []
 
-with open("adventofcode/04-bingo.txt", "r") as f:
-    data = f.read().split("\n")
-    
-    # Only first row is the called number. Save it.
-    cn = data[0].split(",")
+def loadData():
+    with open("adventofcode/04-bingo.txt", "r") as f:
+        data = f.read().split("\n")
+        
+        # Only first row is the called number. Save it.
+        cn = data[0].split(",")
 
-    # Rest all is board data (5X5). Process it.
-    ii = 1
-    while (ii < len(data)):
-        if (data[ii] == ""):
-            #print("Creating a new Board")
-            bl.append(board())
-            wl.append(False)
-        else:
-            #print("Adding to the board")
-            bl[-1].add(data[ii])
+        # Rest all is board data (5X5). Process it.
+        ii = 1
+        while (ii < len(data)):
+            if (data[ii] == ""):
+                #print("Creating a new Board")
+                bl.append(board())
+                wl.append(False)
+            else:
+                #print("Adding to the board")
+                bl[-1].add(data[ii])
 
-        ii = ii + 1
+            ii = ii + 1
+    return bl, cn, wl
 
+bl, cn, wl = loadData()
+score = play_to_win(cn, bl, wl)
+print(f'The calculated {score=}. Expected 8442.')
 
-play(cn, bl, wl)
+bl, cn, wl = loadData()
+score = play_to_lose(cn, bl)
+print(f'The calculated {score=}. Expected 4590.')

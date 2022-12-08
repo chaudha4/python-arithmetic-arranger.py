@@ -24,7 +24,14 @@ def puzzle1():
 
             prev = curr
 
-        print(f'Found measurements {count} than the previous measurement. Expected 1482')
+        print(f'1. Found measurements {count=} than the previous measurement. Expected 1482')
+
+        count = 0
+        for kk in range(1, len(data)):
+            if int(data[kk]) > int(data[kk-1]):
+                count += 1
+
+        print(f'2. Found measurements {count} than the previous measurement. Expected 1482')
 
 
 def puzzle2():
@@ -40,7 +47,7 @@ def puzzle2():
         if (data[ii+1] + data[ii+2] + data[ii+3]) > (data[ii+1] + data[ii+2] + data[ii]):
             count = count+1
 
-    print(f'Three-measurement sliding window count is {count}. Expected 1518.')
+    print(f'5. Three-measurement sliding window count is {count}. Expected 1518.')
 
     # A more efficient way would be to only look at the first and fourth. If 4th is more than Ist, the sliding 
     # window sum must be increasing since 2nd and 3rd are common in both windows.
@@ -51,7 +58,18 @@ def puzzle2():
         #print(ii,data[ii],data[ii+3])
         if (data[ii] < data[ii+3]):
             count += 1
-    print(f'Three-measurement sliding window count is {count}. Expected 1518.')
+    print(f'6. Three-measurement sliding window count is {count}. Expected 1518.')
+
+
+    # Another variation !!
+    count = 0
+    for kk in range(3, len(data)):
+        if int(data[kk]) > int(data[kk-3]):
+            count += 1
+
+    print(f'7. Found measurements {count} than the previous measurement. Expected 1518')
+
+
 
 puzzle1()
 puzzle2()

@@ -10,7 +10,7 @@ def part1():
             #print(ii)
             action = data[ii]
             val = int(data[ii+1])
-            print(action, val)
+            #print(action, val)
             if (action == "forward"):
                 h += val
             elif (action == "up"):
@@ -19,8 +19,8 @@ def part1():
                 v += val
 
 
-    print(h,v)
-    print(h*v)
+    print(f'{h=},{v=}') # Putting = sign allows it to print key and then its value. Neat !!
+    print(f'{h*v=}. Expected 2039912')
 
 """
 In addition to horizontal position and depth, you'll also need to track a third value, aim, which also starts at 0. 
@@ -43,7 +43,7 @@ def part2():
         for ii in range(0, len(data) - 1, 2):
             action = data[ii]
             val = int(data[ii+1])
-            print(action, val)
+            #print(action, val)
             if (action == "forward"):
                 h += val
                 d += (aim * val)
@@ -51,8 +51,8 @@ def part2():
                 aim -= val
             elif (action == "down"):
                 aim += val
-    print(h,d,aim)
-    print(h*d)
+    print(f'{h=} {d=} {aim=}')
+    print(f'{h*d=}. Expected 1942068080')
 
 
 part1()
