@@ -12,6 +12,7 @@ def func1():
         L = len(nums[0])
         cnt0 = [0] * L
         cnt1 = [0] * L
+        
         for bits in nums:
             for idx, bit in enumerate(bits):
                 if ( bit == '0'):
@@ -40,7 +41,11 @@ def func1():
 
         power_consumption = gr * er
 
-        print("Power Consumption", power_consumption)
+        print(f"Expected Power Consumption is 3277364. Calculated {power_consumption=}")
+        
+
+
+
         return power_consumption
 
 

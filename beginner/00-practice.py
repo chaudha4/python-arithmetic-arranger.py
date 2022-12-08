@@ -1,13 +1,13 @@
 
 
-for ii in range(8, -1, -1):
-    
-
-    if ii == 7:
-        print("a")
-        break
-    
-    print(ii)
 
 
-print(1 <= 3 <= 5)
+# Neat Tricks - Check with using 'and' 'or'
+ii = 3
+print(1 <= ii <= 5) # Is ii between 1 and 5 ?
+print(ii >= 1 and ii <= 5) # Boring Way ?
+
+# Print key and value with less typing
+print(f'this is a neat trick {ii=}')
+print(f'this is boring {ii}')
+
