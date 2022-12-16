@@ -18,8 +18,9 @@ def load(file='adventofcode/temp.txt'):
             risk.append(cols)   
     return risk
 
+# This will be slow as it is a brute force solution. It tries to find all possible paths and their costs. WIll not scale.
 
-def dfs_backup(risk, x, y):
+def dfs_solution(risk, x, y):
 
     visited = set()
     #visited.add(( ((x,y),), risk[x][y],))
@@ -70,7 +71,7 @@ def dfs_backup(risk, x, y):
     return completed_paths
 
 
-def dijkstra(costs, x, y):
+def dijkstra_solution(costs, x, y):
 
  
     newcosts = defaultdict(int)
@@ -117,7 +118,7 @@ def puzzle1():
     costs = load("adventofcode/15-chiton.txt")
     #costs = load()
     stopAt = len(costs)
-    cumulative_costs = dijkstra(costs,0,0)
+    cumulative_costs = dijkstra_solution(costs,0,0)
     #print(cumulative_costs)
     minCost=cumulative_costs[(stopAt-1,stopAt-1)]
     print(f'Puzzle1: Expected 619. Calculated {minCost=}')
@@ -159,7 +160,7 @@ def testGetCost():
 
 
 
-def dijkstra_puzzle2(costs):
+def dijkstra_puzzle2_solution(costs):
 
     stopAt = len(costs) * 5
     visited = set()
@@ -193,16 +194,59 @@ def dijkstra_puzzle2(costs):
 
 def puzzle2():
     costs = load("adventofcode/15-chiton.txt")
-    minCost = dijkstra_puzzle2(costs)
+    minCost = dijkstra_puzzle2_solution(costs)
+    print(f'Puzzle1: Expected 2922. Calculate {minCost=}')
+
+
+def puzzle3():
+    costs = load("adventofcode/15-chiton.txt")
+    minCost = dijkstra_solution_track_min_cost_path(costs)
     print(f'Puzzle1: Expected 2922. Calculate {minCost=}')
 
 
 
-    
+
+def dijkstra_solution_track_min_cost_path(costs):
+
+    stopAt = len(costs)
+    visited = set()
+    todo = [(0,[(0,0)])] # Cost, X, Y
+    heapq.heapify(todo)
+
+    while len(todo):
+        
+        cost, pathsofar = heapq.heappop(todo)
+        
+        x, y  = pathsofar[-1]
+        
+        if (x,y) in visited:
+            continue
+
+        visited.add((x,y))
+
+        #print(f'Processing {x=} {y=} {cost=}')
+        if x == stopAt - 1 and y == stopAt - 1: # Reached Destination Cell.
+            print(pathsofar)
+            return cost
+
+        next = [
+            (x-1, y),
+            (x+1, y),
+            (x, y-1),
+            (x, y+1),
+        ]
+
+        #print(f'Now processing {cost=} {cell=}')
+        for xx, yy in next:
+            if 0 <= xx < stopAt and 0 <= yy < stopAt:
+                newCost = cost + getCost(costs, xx, yy)
+                newPaths = [*pathsofar, (xx,yy)]
+                heapq.heappush(todo, (newCost, newPaths))
 
 #testGetCost()  
-puzzle1()
-puzzle2()
+#puzzle1()
+#puzzle2()
+puzzle3()
 
 
 
