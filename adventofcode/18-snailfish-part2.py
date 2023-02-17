@@ -4,8 +4,6 @@ import math
 #https://adventofcode.com/2021/day/18
 
 
-
-
 def explode(inputList):
     
     assert type(inputList) == list
@@ -47,7 +45,6 @@ def explode(inputList):
 
     # NOTHING TO EXPLODE.
     if idx1 is None:
-        #return inputList, False
         #Try Split Next
         # if split produces a pair that meets the explode criteria, that pair explodes before other splits occur.
         return split(inputList)
@@ -116,6 +113,8 @@ def split(inputList):
         else:
             splitList.append(c)
 
+    # If we did a split, that could result in a need to explaode again. The didSplit will be tru and that will trigger one more 
+    # explode in the explode().
     return splitList, didSplit
 
 
@@ -124,14 +123,12 @@ def add(left, right):
     assert type(right) == str
 
     addedList = f'[{left},{right}]'
-
-    # Explode till we don't need to.
-    #print(f'{addedList=}')
     expList = convert2list(addedList)
     explodeMore = True
+
+    # Explode till we don't need to. Explode will also do a split.
     while explodeMore:
         expList, explodeMore = explode(expList)
-
 
     return convert2String(expList)
 
@@ -178,7 +175,6 @@ def getMagnitude(inputList):
     
     return getMagnitude(newList)
 
-
 def testGetMagnitude():
     test = [ 
         ('[9,1]', 29),
@@ -198,28 +194,29 @@ def testGetMagnitude():
         assert mm ==  val[1], f'Test Failed. {val=} {result=}'
         print(f'Test passed for {val}')
 
-
-
-def solution1():
+def solution2():
     with open("./adventofcode/18-snailfish.txt") as f:
+        largestMagnitude = 0
         lines = f.read().split()
-        left = None
-        for l in lines:
-            if left is None:
-                #left = convert2list(l)
-                left = l
-            else:
-                #right = convert2list(l)
-                result = add(left, l)
-                left = result
+        prevPair = None
+        for currPair in lines:
+            if prevPair is not None:
+                result = add(prevPair, currPair)
+                mlist = getMagnitude(convert2list(result))
+                mval = int(mlist[0])
+                if mval > largestMagnitude:
+                    largestMagnitude = mval
+
+                #Note that addition is not commutative - that is, x + y and y + x can produce different results. So try other way too
+                result = add(currPair, prevPair)
+                mlist = getMagnitude(convert2list(result))
+                mval = int(mlist[0])
+                if mval > largestMagnitude:
+                    largestMagnitude = mval
+                                
+            prevPair = currPair
  
-        print(left)
-        mlist = getMagnitude(convert2list(left))
-        mval = int(mlist[0])
-
-        assert mval ==  3647, f'Test Failed. {mval=} Expected=3647'
-        print(f'Test passed. {mval=} Expected=3647')
-
+        print(f'The largest magnitude seen is {largestMagnitude=}')
 
 # Need this function to handle numbers greater than 9. For Example 24 should not be parsed as "2" and "4"
 def convert2list(inputStr):
@@ -325,11 +322,10 @@ def test_add():
     result = add('[[[[4,3],4],4],[7,[[8,4],9]]]', '[1,1]')
     assert result == '[[[[0,7],4],[[7,8],[6,0]]],[8,1]]', f'{result=}'
 
-testExplode()
-testMultipleExplode()
-test_add()
-testConvert2list()
-testSplit()
-testGetMagnitude()
-
-solution1()
+# testExplode()
+# testMultipleExplode()
+# test_add()
+# testConvert2list()
+# testSplit()
+# solution2()
+# testGetMagnitude()
