@@ -4,7 +4,7 @@
 from collections import namedtuple
 
 
-def load(file='adventofcode/22-input-1.txt'):
+def load(file='adventofcode/22-input.txt'):
 
     Operation = namedtuple("Operation", ["op", "x1", 'x2', 'y1', "y2", "z1", 'z2'])
     ret = []
@@ -81,13 +81,14 @@ def test1():
     assert count == 590784
 
 def solution1():
-    opers = load("adventofcode/22-input-part1.txt")
+    opers = load("adventofcode/22-input.txt")
     count = reboot(opers)
+    print(f'Day 22: Reactor Reboot - Part 1. After running the above reboot steps, {count} cubes are on.')
     assert count == 615700
 
 
 
-test1()
+# test1()
 solution1()
 
     
