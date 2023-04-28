@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 
-def load1(file:str ='adventofcode/24-test-data.txt') -> list:
+def load1(file:str ='24-test-data.txt') -> list:
 
     rows = None
     with open(file) as f:
@@ -10,7 +10,7 @@ def load1(file:str ='adventofcode/24-test-data.txt') -> list:
     return rows
 
 
-def load_rules(file:str ='adventofcode/24-test-data.txt') -> defaultdict:
+def load_rules(file:str ='24-test-data.txt') -> defaultdict:
 
     rows = None
     with open(file) as f:
@@ -83,15 +83,11 @@ def calculate(model_num: int):
 
     return results
 
-def apply_rule(w_input: int, z_input: int, ruled_id: int, rules: defaultdict, cache :dict={}):
+def apply_rule(w_input: int, z_input: int, ruled_id: int, rules: defaultdict):
 
     key = (w_input, z_input, ruled_id,)
 
-    #print(f'{key=} {cache=}')
-    if key in cache:
-        print(f'Returning from cache {key=} {cache[key]=}')
-        return cache[key]
-    
+   
     results = defaultdict(int)
     results['w'] = w_input
     results['z'] = z_input
@@ -137,8 +133,7 @@ def apply_rule(w_input: int, z_input: int, ruled_id: int, rules: defaultdict, ca
         else:
             assert False, f'Unsupported Operation {oper}'
     
-    cache[key] = results['z']
-    return results['z']
+    return results
 
 
 def evaluate_model_number(model_num: int, rules: defaultdict):
@@ -175,8 +170,6 @@ def test1():
         if start < 10000000000000:
             assert False, f'Failed to find a model number'
 
-#test1()
-
 
 
 def test2():
@@ -201,6 +194,110 @@ def test2():
         if start < 10000000000000 or start < 99999989998888:
             assert False, f'Failed to find a model number'
 
-#test1()
 
-test2()
+def test_rule0():
+
+    rules = load_rules()
+    #print(rules)
+    w_input = 1
+    z_input = 0
+    ruled_id = 0
+
+    for w_input in range(1,10):
+        result = apply_rule(w_input, z_input, ruled_id, rules)
+        print(result)
+
+def test_rule1():
+
+    rules = load_rules()
+    #print(rules)
+    w_input = 1
+    z_input = 0
+    ruled_id = 1
+    z_outputs = []
+
+
+    for w_input in range(1,10):
+        for z_input in range(8,17):
+            result = apply_rule(w_input, z_input, ruled_id, rules)
+            z_outputs.append(result['z'])
+            print(f'{w_input=} {z_input=} {result=}')
+    
+    print(f'{z_outputs=}')
+
+
+def test_rule01():
+
+    rules = load_rules()
+    #print(rules)
+    w_input = 1
+    z_input = 0
+    ruled_id = 0
+    z_outputs = []
+
+    for w_input in range(1,10):
+        result = apply_rule(w_input, z_input, ruled_id, rules)
+        z_outputs.append(result['z'])
+
+    print(f'{z_outputs=}')
+
+    ruled_id = 1
+    for w_input in range(1,10):
+        for z_input in z_outputs:
+            result = apply_rule(w_input, z_input, ruled_id, rules)
+            print(f'{w_input=} {z_input=} {result=}')
+    
+    #print(f'{z_outputs=}')
+
+"""
+Processing ruled_id=0 1
+
+Processing ruled_id=1 9
+
+Processing ruled_id=2 81
+
+Processing ruled_id=3 729
+
+Processing ruled_id=4 6561
+
+Processing ruled_id=5 59049
+
+Processing ruled_id=6 531441
+
+Processing ruled_id=7 4782969   --- Timed out here !!
+"""
+def test_rule_recursive(ruled_id, rules, z_vals):
+
+    print(f'\nProcessing {ruled_id=} {len(z_vals)}')
+
+    if ruled_id > 9:
+        return
+
+    z_outputs = []
+
+    for w_input in range(1,10):
+        for z_input in z_vals:
+            result = apply_rule(w_input, z_input, ruled_id, rules)
+            #print(f'{ruled_id=} {w_input=} {z_input=} {result=}')
+            z_outputs.append(result['z'])
+    
+    ruled_id = ruled_id + 1
+    test_rule_recursive(ruled_id, rules, z_outputs)
+    
+    #print(f'{z_outputs=}')
+
+
+
+def test_rules():
+
+    rules = load_rules()
+    #print(rules)
+    z_vals = [0]
+    test_rule_recursive(0, rules, z_vals)
+    
+
+
+
+test_rules()
+#test_rule1()
+#test_rule01()
